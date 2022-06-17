@@ -23,6 +23,17 @@ module.exports = {
         port: 8080,
         // 运行时打开页面
         open: true
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.less$/i,
+                use: ["style-loader", "css-loader", "less-loader"]
+            },
+        ]
     }
-
 }
