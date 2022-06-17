@@ -33,7 +33,22 @@ module.exports = {
             {
                 test: /\.less$/i,
                 use: ["style-loader", "css-loader", "less-loader"]
-            },
+            }, {
+                test: /\.(png|jpg|gif|jpeg)$/i,
+                type: 'asset',
+                // 设置文件大小界限为2kb
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 2 * 1024
+                    }
+                }
+            }, {
+                test: /\.(eot|svg|ttf|woff|woff2)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: 'fonts/[hash:6][ext]'
+                }
+            }
         ]
     }
 }
