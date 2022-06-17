@@ -1,5 +1,7 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
+    // 设置打包模式
     mode: 'development',
     // 入口路径
     entry: './src/main.js',
@@ -10,6 +12,17 @@ module.exports = {
         filename: 'webpack-demo.js',
         // 删除上次文件
         clean: true
+    },
+    plugins: [
+        // 设置输出模板
+        new HtmlWebpackPlugin({
+            template: './public/index.html'
+        })
+    ],
+    devServer: {
+        port: 8080,
+        // 运行时打开页面
+        open: true
     }
 
 }
