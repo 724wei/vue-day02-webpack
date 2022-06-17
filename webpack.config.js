@@ -1,5 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+const { join } = require('path')
 module.exports = {
     // 设置打包模式
     mode: 'development',
@@ -16,24 +18,35 @@ module.exports = {
     plugins: [
         // 设置输出模板
         new HtmlWebpackPlugin({
-            template: './public/index.html'
-        })
+            template: join(__dirname, 'public/index.html')
+        }),
+        new VueLoaderPlugin()
     ],
     devServer: {
-        port: 8080,
+        port: 30000,
         // 运行时打开页面
         open: true
     },
     module: {
         rules: [
-            {
+            {//vue
+                test: /\.vue$/,
+                use: ["vue-loader"]
+            },
+            {//js高级
+                test: /\.js$/,
+                // exclude: path.join(__dirname, 'node_modules'),
+                use: ["babel-loader"],
+            },
+            {//css
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"]
             },
-            {
+            {//less
                 test: /\.less$/i,
                 use: ["style-loader", "css-loader", "less-loader"]
-            }, {
+            },
+            {//图片
                 test: /\.(png|jpg|gif|jpeg)$/i,
                 type: 'asset',
                 // 设置文件大小界限为2kb
@@ -42,7 +55,8 @@ module.exports = {
                         maxSize: 2 * 1024
                     }
                 }
-            }, {
+            },
+            {//文件
                 test: /\.(eot|svg|ttf|woff|woff2)$/i,
                 type: "asset/resource",
                 generator: {
