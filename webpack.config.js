@@ -46,10 +46,12 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
+                // use: ["style-loader", "css-loader"],
             },
             {//less
                 test: /\.less$/i,
-                use: ["style-loader", "css-loader", "less-loader"]
+                // use: ["style-loader", "css-loader", "less-loader"]
+                use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
             },
             {//图片
                 test: /\.(png|jpg|gif|jpeg)$/i,
