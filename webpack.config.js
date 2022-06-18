@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const { join } = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
     // 设置打包模式
     mode: 'development',
@@ -20,7 +21,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: join(__dirname, 'public/index.html')
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new MiniCssExtractPlugin()
     ],
     devServer: {
         port: 30000,
@@ -37,9 +39,13 @@ module.exports = {
                 test: /\.js$/,
                 use: ["babel-loader"],
             },
-            {//css
+            // {//css
+            //     test: /\.css$/i,
+            //     use: ["style-loader", "css-loader"]
+            // },
+            {
                 test: /\.css$/i,
-                use: ["style-loader", "css-loader"]
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
             },
             {//less
                 test: /\.less$/i,
