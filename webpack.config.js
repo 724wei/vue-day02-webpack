@@ -35,7 +35,6 @@ module.exports = {
             },
             {//js高级
                 test: /\.js$/,
-                // exclude: path.join(__dirname, 'node_modules'),
                 use: ["babel-loader"],
             },
             {//css
